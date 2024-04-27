@@ -95,9 +95,9 @@ async def stop(ctx):
 
 # команда для очистки сообщений канала
 @client.command()
-async def clear(ctx, amount=20):
-    await ctx.channel.purge(limit=amount)
-    await ctx.send("Очистка мусора завершена (удалено 20 последних сообщений)")
+async def clear(ctx, amount):
+    await ctx.channel.purge(limit=int(amount))
+    await ctx.send(f"Очистка мусора завершена (удалено {amount} последних сообщений)")
 
 
 client.run(TOKEN)  # токен в отдельном файле config
