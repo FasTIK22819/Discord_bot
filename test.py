@@ -6,6 +6,7 @@ from discord.utils import get
 from discord import FFmpegPCMAudio
 from discord import TextChannel
 from youtube_dl import YoutubeDL
+from config import TOKEN
 
 load_dotenv()
 # назначение префикса для команд
@@ -33,10 +34,11 @@ async def join(ctx):
 # команда изгнать бота из голосового канала
 @client.command()
 async def leave(ctx):
-    channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
         await voice.disconnect()
+    else:
+        await ctx.send('Бот и так бомж')
 
 
 # команда для воспроизведения звука с URL-адреса youtube
@@ -98,6 +100,4 @@ async def clear(ctx, amount=20):
     await ctx.send("Очистка мусора завершена (удалено 20 последних сообщений)")
 
 
-TOKEN = 'MTIyOTY5MjU0NDU0MDA4MjIxNg.GplfGP.C3mzxtjxEVOYsAI1UZK1mgXKlpeT7K8Cc85aaY'
-
-client.run(TOKEN)
+client.run(TOKEN)  # токен в отдельном файле config
