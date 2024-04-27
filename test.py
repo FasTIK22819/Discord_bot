@@ -12,7 +12,7 @@ load_dotenv()
 client = commands.Bot(command_prefix='!', intents=discord.Intents.all())
 players = {}
 
-
+# Проверка коммита
 # проверка готовности бота к работе
 @client.event
 async def on_ready():
