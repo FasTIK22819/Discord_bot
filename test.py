@@ -30,6 +30,15 @@ async def join(ctx):
         voice = await channel.connect()
 
 
+# команда изгнать бота из голосового канала
+@client.command()
+async def leave(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+    if voice and voice.is_connected():
+        await voice.disconnect()
+
+
 # команда для воспроизведения звука с URL-адреса youtube
 @client.command()
 async def play(ctx, url):
@@ -84,9 +93,9 @@ async def stop(ctx):
 
 # команда для очистки сообщений канала
 @client.command()
-async def clear(ctx, amount=5):
+async def clear(ctx, amount=20):
     await ctx.channel.purge(limit=amount)
-    await ctx.send("Очистка мусора завершена")
+    await ctx.send("Очистка мусора завершена (удалено 20 последних сообщений)")
 
 
 TOKEN = 'MTIyOTY5MjU0NDU0MDA4MjIxNg.GplfGP.C3mzxtjxEVOYsAI1UZK1mgXKlpeT7K8Cc85aaY'
